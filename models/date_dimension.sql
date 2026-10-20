@@ -5,20 +5,24 @@ TO_Timestamp(STARTED_AT) AS Date_Time,
 DATE(TO_Timestamp(STARTED_AT)) Date_Count,
 Hour(TO_Timestamp(STARTED_AT)) AS Hour_Count,
 
-Case 
-when
-Dayname(TO_Timestamp(STARTED_AT)) in ('Sat','Sun') THEN 'Weekend'
-Else 'BusinessDay'
-end as DAY_TYPE,
+--Case 
+--when
+--Dayname(TO_Timestamp(STARTED_AT)) in ('Sat','Sun') THEN 'Weekend'
+--Else 'BusinessDay'
+--end as DAY_TYPE,
+{{DayType('STARTED_AT')}} AS DAY_TYPE,
 
-Case When 
-Month(TO_Timestamp(STARTED_AT)) in (11,12,1,2) THEN 'Winter'
-When 
-Month(TO_Timestamp(STARTED_AT)) in (3,4,5,6) THEN 'Summer'
-When 
-Month(TO_Timestamp(STARTED_AT)) in (7,8,9,10) THEN 'Rain'
-Else 'Please Check The Month'
-End as Month_of_Year
+--Case When 
+--Month(TO_Timestamp(STARTED_AT)) in (11,12,1,2) THEN 'Winter'
+--When 
+--Month(TO_Timestamp(STARTED_AT)) in (3,4,5,6) THEN 'Summer'
+--When 
+--Month(TO_Timestamp(STARTED_AT)) in (7,8,9,10) THEN 'Rain'
+--Else 'Please Check The Month'
+--End as Month_of_Yea,
+{{Season('STARTED_AT')}} as Month_of_Yea,
+
+{{Function1('STARTED_AT')}} AS Activity_Status
 
 from 
 {{ source('demo', 'bike') }}
