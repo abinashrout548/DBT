@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_btc
+    description: "This model represents the BTC stage data."
+    columns:
+      - name: HASH_KEY
+        description: "The unique hash key for each BTC record."
+        tests:
+          - not_null
+          - unique
